@@ -28,17 +28,10 @@ namespace TestProject.WebAPI.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAll([FromBody]Filters filters)
+        public async Task<IActionResult> GetAll([FromQuery]Filters filters)
         {
             var users = await _usersService.Get(null, filters);
             return Ok(users);
-        }
-
-        [HttpGet("/test")]
-        public async Task<IActionResult> GetAll2()
-        {
-            
-            return Ok("sdadasdasd");
         }
 
         [HttpPost]

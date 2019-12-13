@@ -13,7 +13,6 @@ namespace TestProject.WebAPI
 {
     public class Startup
     {
-        private readonly TestProjectContext _testProjectContext;
         public const string DatabaseFileName = "orders.db";
 
         public Startup(IConfiguration configuration)

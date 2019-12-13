@@ -19,7 +19,7 @@ namespace TestProject.WebAPI.Services
         public async Task<IEnumerable<User>> Get(int[] ids, Filters filters)
         {
             var users = _testProjectContext.Users.AsQueryable();
-            var s = _testProjectContext.Users.ToList();
+
             if (filters == null)
                 filters = new Filters();
 
