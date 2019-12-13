@@ -7,7 +7,7 @@ using TestProject.WebAPI.Services;
 namespace TestProject.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
@@ -28,10 +28,17 @@ namespace TestProject.WebAPI.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAll(Filters filters)
+        public async Task<IActionResult> GetAll([FromBody]Filters filters)
         {
             var users = await _usersService.Get(null, filters);
             return Ok(users);
+        }
+
+        [HttpGet("/test")]
+        public async Task<IActionResult> GetAll2()
+        {
+            
+            return Ok("sdadasdasd");
         }
 
         [HttpPut]

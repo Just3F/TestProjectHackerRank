@@ -2,6 +2,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -28,10 +29,8 @@ namespace TestProject.Tests
 
         private async Task SeedData()
         {
-            // Create entry with id 1 
             var createForm0 = GenerateCreateForm("Dmitry", "Vasilyuk", 24, "just3f@yandex.ru", "12345678");
             var response0 = await Client.PostAsync("/api/restaurant", new StringContent(JsonConvert.SerializeObject(createForm0), Encoding.UTF8, "application/json"));
-
         }
 
         private CreateUserForm GenerateCreateForm(string firstName, string lastName, uint age, string email, string password)
@@ -47,9 +46,16 @@ namespace TestProject.Tests
         }
 
         [Fact]
-        public void Test1()
+        public async Task Test1()
         {
+            await SeedData();
 
+            // Get All restaurants 
+            var response0 = await Client.GetAsync("/api/users");
+            response0.StatusCode.Should().BeEquivalentTo(200);
+            var realData0 = JsonConvert.DeserializeObject(response0.Content.ReadAsStringAsync().Result);
+            var expectedData0 = JsonConvert.DeserializeObject("[{\"id\":1,\"city\":\"Miami\",\"name\":\"Big Brewskey\",\"estimatedCost\":1500,\"averageRating\":\"4.8\",\"votes\":500},{\"id\":2,\"city\":\"Florida\",\"name\":\"Social\",\"estimatedCost\":1600,\"averageRating\":\"4.7\",\"votes\":400},{\"id\":3,\"city\":\"Miami\",\"name\":\"Social\",\"estimatedCost\":1000,\"averageRating\":\"4.2\",\"votes\":50},{\"id\":4,\"city\":\"Florida\",\"name\":\"CCD\",\"estimatedCost\":1000,\"averageRating\":\"3.8\",\"votes\":200},{\"id\":5,\"city\":\"Miami\",\"name\":\"CCD\",\"estimatedCost\":1100,\"averageRating\":\"4.1\",\"votes\":100}]");
+            realData0.Should().BeEquivalentTo(expectedData0);
         }
 
         private void SetUpClient()
