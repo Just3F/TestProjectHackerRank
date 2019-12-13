@@ -41,8 +41,15 @@ namespace TestProject.WebAPI.Controllers
             return Ok("sdadasdasd");
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> Add(User user)
+        {
+            await _usersService.Add(user);
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(User user)
         {
             await _usersService.Add(user);
             return NoContent();

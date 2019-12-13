@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ namespace TestProject.WebAPI
 {
     public class Startup
     {
+        private readonly TestProjectContext _testProjectContext;
         public const string DatabaseFileName = "orders.db";
 
         public Startup(IConfiguration configuration)
