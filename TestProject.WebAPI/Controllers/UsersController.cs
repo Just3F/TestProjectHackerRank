@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using TestProject.WebAPI.Data;
 using TestProject.WebAPI.Services;
 
@@ -22,7 +25,7 @@ namespace TestProject.WebAPI.Controllers
         {
             var user = (await _usersService.Get(new[] { id }, null)).FirstOrDefault();
             if (user == null)
-                NotFound();
+                return NotFound();
 
             return Ok(user);
         }
@@ -38,13 +41,18 @@ namespace TestProject.WebAPI.Controllers
         public async Task<IActionResult> Add(User user)
         {
             await _usersService.Add(user);
-            return NoContent();
+            return Ok(user);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(User user)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, User user)
         {
-            await _usersService.Add(user);
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            await _usersService.Update(user);
             return NoContent();
         }
 
@@ -53,10 +61,26 @@ namespace TestProject.WebAPI.Controllers
         {
             var user = (await _usersService.Get(new[] { id }, null)).FirstOrDefault();
             if (user == null)
-                NoContent();
+                return NotFound();
 
             await _usersService.Delete(user);
-            return Ok(user);
+            return NoContent();
+        }
+
+        [HttpPost("export")]
+        public async Task<IActionResult> Export()
+        {
+            string content;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                content = await reader.ReadToEndAsync();
+            }
+
+            var users = JsonConvert.DeserializeObject<IEnumerable<User>>(content);
+
+            users = await _usersService.AddRange(users);
+
+            return Ok(users);
         }
     }
 }

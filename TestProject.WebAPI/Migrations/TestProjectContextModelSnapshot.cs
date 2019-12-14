@@ -24,7 +24,7 @@ namespace TestProject.WebAPI.Migrations
                     b.Property<uint>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("FirstNames")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
