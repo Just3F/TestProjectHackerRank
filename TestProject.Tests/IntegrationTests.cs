@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newtonsoft.Json;
 using TestProject.WebAPI;
 using TestProject.WebAPI.Data;
+using TestProject.WebAPI.Models;
 using TestProject.WebAPI.SeedData;
 using Xunit;
 
@@ -41,7 +43,7 @@ namespace TestProject.Tests
 
             var createForm2 = GenerateCreateForm("Daniel", "Olson", 19, "testemail2@mail.com", "12345678");
             var response2 = await Client.PostAsync("/api/users", new StringContent(JsonConvert.SerializeObject(createForm2), Encoding.UTF8, "application/json"));
-            
+
             var createForm3 = GenerateCreateForm("Olga", "Verso", 19, "testemail21s2@mail.com", "12345678");
             var response3 = await Client.PostAsync("/api/users", new StringContent(JsonConvert.SerializeObject(createForm3), Encoding.UTF8, "application/json"));
         }
@@ -167,8 +169,31 @@ namespace TestProject.Tests
             response2.StatusCode.Should().BeEquivalentTo(StatusCodes.Status200OK);
             var filteredUsers = JsonConvert.DeserializeObject<IEnumerable<User>>(response2.Content.ReadAsStringAsync().Result).ToArray();
             filteredUsers.Length.Should().Be(3);
-            filteredUsers.Where(x=>x.FirstName == "Frances").ToArray().Length.Should().Be(1);
-            filteredUsers.Where(x=>x.FirstName == "Veronika").ToArray().Length.Should().Be(2);
+            filteredUsers.Where(x => x.FirstName == "Frances").ToArray().Length.Should().Be(1);
+            filteredUsers.Where(x => x.FirstName == "Veronika").ToArray().Length.Should().Be(2);
+        }
+
+        //Here need to implement authorization by JWT tokens
+        [Fact]
+        public async Task Test7()
+        {
+            await SeedData();
+            var userLoginForm = new LoginUserForm { Email = "testemail2@mail.com", Password = "12345678" };
+
+            //Getting token by email and password
+            var response0 = await Client.PostAsync("/token",
+                new StringContent(JsonConvert.SerializeObject(userLoginForm), Encoding.UTF8, "application/json"));
+            var jwtData = JsonConvert.DeserializeObject<LoginResponseModel>(response0.Content.ReadAsStringAsync().Result);
+
+            //Check that user Unauthorized
+            var response1 = await Client.GetAsync("/currentuser");
+            response1.StatusCode.Should().BeEquivalentTo(StatusCodes.Status401Unauthorized);
+
+            //adding token to request and check this end-point again
+            Client.DefaultRequestHeaders.Add("Authorization", "Bearer " + jwtData.AccessToken);
+            var response2 = await Client.GetAsync("/currentuser");
+            var user = JsonConvert.DeserializeObject<User>(response2.Content.ReadAsStringAsync().Result);
+            user.Email.Should().BeEquivalentTo("testemail2@mail.com");
         }
 
         private void SetUpClient()
