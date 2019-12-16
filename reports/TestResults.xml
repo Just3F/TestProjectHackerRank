@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assemblies timestamp="12/16/2019 09:37:26">
+  <assembly name="C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\bin\Debug\netcoreapp3.0\TestProject.Tests.dll" run-date="2019-12-16" run-time="09:37:26" total="7" passed="7" failed="0" skipped="0" time="1.441" errors="0">
+    <errors />
+    <collection total="7" passed="7" failed="0" skipped="0" name="Test collection for TestProject.Tests.IntegrationTests" time="1.441">
+      <test name="TestProject.Tests.IntegrationTests.Test2" type="TestProject.Tests.IntegrationTests" method="Test2" time="0.9294345" result="Pass">
+        <traits />
+      </test>
+      <test name="TestProject.Tests.IntegrationTests.Test4" type="TestProject.Tests.IntegrationTests" method="Test4" time="0.0368693" result="Pass">
+        <traits />
+      </test>
+      <test name="TestProject.Tests.IntegrationTests.Test5" type="TestProject.Tests.IntegrationTests" method="Test5" time="0.0778710" result="Pass">
+        <traits />
+      </test>
+      <test name="TestProject.Tests.IntegrationTests.Test7" type="TestProject.Tests.IntegrationTests" method="Test7" time="0.0956704" result="Pass">
+        <traits />
+      </test>
+      <test name="TestProject.Tests.IntegrationTests.Test6" type="TestProject.Tests.IntegrationTests" method="Test6" time="0.2517900" result="Pass">
+        <traits />
+      </test>
+      <test name="TestProject.Tests.IntegrationTests.Test3" type="TestProject.Tests.IntegrationTests" method="Test3" time="0.0270663" result="Pass">
+        <traits />
+      </test>
+      <test name="TestProject.Tests.IntegrationTests.Test1" type="TestProject.Tests.IntegrationTests" method="Test1" time="0.0218804" result="Pass">
+        <traits />
+      </test>
+    </collection>
+  </assembly>
+</assemblies>
