@@ -1,27 +1,201 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<assemblies timestamp="12/16/2019 09:37:26">
-  <assembly name="C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\bin\Debug\netcoreapp3.0\TestProject.Tests.dll" run-date="2019-12-16" run-time="09:37:26" total="7" passed="7" failed="0" skipped="0" time="1.441" errors="0">
+<assemblies timestamp="12/16/2019 15:03:23">
+  <assembly name="C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\bin\Debug\netcoreapp3.0\TestProject.Tests.dll" run-date="2019-12-16" run-time="15:03:23" total="7" passed="0" failed="7" skipped="0" time="0.828" errors="0">
     <errors />
-    <collection total="7" passed="7" failed="0" skipped="0" name="Test collection for TestProject.Tests.IntegrationTests" time="1.441">
-      <test name="TestProject.Tests.IntegrationTests.Test2" type="TestProject.Tests.IntegrationTests" method="Test2" time="0.9294345" result="Pass">
+    <collection total="7" passed="0" failed="7" skipped="0" name="Test collection for TestProject.Tests.IntegrationTests" time="0.828">
+      <test name="TestProject.Tests.IntegrationTests.Test2" type="TestProject.Tests.IntegrationTests" method="Test2" time="0.6619935" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.SeedData() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 39
+   at TestProject.Tests.IntegrationTests.Test2() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 82
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="TestProject.Tests.IntegrationTests.Test4" type="TestProject.Tests.IntegrationTests" method="Test4" time="0.0368693" result="Pass">
+      <test name="TestProject.Tests.IntegrationTests.Test4" type="TestProject.Tests.IntegrationTests" method="Test4" time="0.0384365" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.SeedData() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 39
+   at TestProject.Tests.IntegrationTests.Test4() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 119
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="TestProject.Tests.IntegrationTests.Test5" type="TestProject.Tests.IntegrationTests" method="Test5" time="0.0778710" result="Pass">
+      <test name="TestProject.Tests.IntegrationTests.Test5" type="TestProject.Tests.IntegrationTests" method="Test5" time="0.0472947" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.SeedData() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 39
+   at TestProject.Tests.IntegrationTests.Test5() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 133
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="TestProject.Tests.IntegrationTests.Test7" type="TestProject.Tests.IntegrationTests" method="Test7" time="0.0956704" result="Pass">
+      <test name="TestProject.Tests.IntegrationTests.Test7" type="TestProject.Tests.IntegrationTests" method="Test7" time="0.0208666" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.SeedData() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 39
+   at TestProject.Tests.IntegrationTests.Test7() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 188
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="TestProject.Tests.IntegrationTests.Test6" type="TestProject.Tests.IntegrationTests" method="Test6" time="0.2517900" result="Pass">
+      <test name="TestProject.Tests.IntegrationTests.Test6" type="TestProject.Tests.IntegrationTests" method="Test6" time="0.0222015" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.Test6() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 165
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="TestProject.Tests.IntegrationTests.Test3" type="TestProject.Tests.IntegrationTests" method="Test3" time="0.0270663" result="Pass">
+      <test name="TestProject.Tests.IntegrationTests.Test3" type="TestProject.Tests.IntegrationTests" method="Test3" time="0.0188283" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.SeedData() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 39
+   at TestProject.Tests.IntegrationTests.Test3() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 99
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="TestProject.Tests.IntegrationTests.Test1" type="TestProject.Tests.IntegrationTests" method="Test1" time="0.0218804" result="Pass">
+      <test name="TestProject.Tests.IntegrationTests.Test1" type="TestProject.Tests.IntegrationTests" method="Test1" time="0.0181003" result="Fail">
+        <failure>
+          <message>System.InvalidOperationException : Unable to resolve service for type 'TestProject.WebAPI.Services.IUsersService' while attempting to activate 'TestProject.WebAPI.Controllers.UsersController'.</message>
+          <stack-trace>   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.&lt;&gt;c__DisplayClass4_0.&lt;CreateActivator&gt;b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.&lt;&gt;c__DisplayClass5_0.&lt;CreateControllerFactory&gt;g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeNextResourceFilter&gt;g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.&lt;Invoke&gt;g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.TestHost.HttpContextBuilder.&lt;&gt;c__DisplayClass20_0.&lt;&lt;SendAsync&gt;g__RunRequestAsync|0&gt;d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.TestHost.ClientHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at TestProject.Tests.IntegrationTests.SeedData() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 39
+   at TestProject.Tests.IntegrationTests.Test1() in C:\Users\Dmitry PC\source\repos\TestProject.WebAPI\TestProject.Tests\IntegrationTests.cs:line 68
+--- End of stack trace from previous location where exception was thrown ---</stack-trace>
+        </failure>
         <traits />
       </test>
     </collection>

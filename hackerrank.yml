@@ -1,7 +1,14 @@
 version: 1.0
 configuration:
   has_webserver: true
+  readonly_paths:
+    - TestProject.Tests/IntegrationTests.cs
+  scoring:
+    command: rm -rf reports && dotnet build && dotnet test --logger xunit --results-directory ./reports/
+    files: [reports/TestResults.xml]
   ide_config:
+    default_open_files:
+      - TestProject.WebAPI/Controllers/UsersController.cs
     default_open_files:
       - TestProject.WebAPI.sln
     project_menu:
