@@ -9,8 +9,6 @@ configuration:
   ide_config:
     default_open_files:
       - TestProject.WebAPI/Controllers/UsersController.cs
-    default_open_files:
-      - TestProject.WebAPI.sln
     project_menu:
       run: dotnet build;cd TestProject.WebAPI;dotnet run
       install: dotnet build
