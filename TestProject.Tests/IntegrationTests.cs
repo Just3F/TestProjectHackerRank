@@ -60,6 +60,8 @@ namespace TestProject.Tests
             };
         }
 
+        // TEST NAME - getAllEntriesById
+        // TEST DESCRIPTION - It finds all users in Database
         [Fact]
         public async Task Test1()
         {
@@ -72,7 +74,8 @@ namespace TestProject.Tests
             users.Count().Should().Be(4);
         }
 
-        //Check getting user by Id web api end point
+        // TEST NAME - getSingleEntryById
+        // TEST DESCRIPTION - It finds single user by ID
         [Fact]
         public async Task Test2()
         {
@@ -88,7 +91,8 @@ namespace TestProject.Tests
             response1.StatusCode.Should().BeEquivalentTo(StatusCodes.Status404NotFound);
         }
 
-        //Check getting all users and filtering by first name
+        // TEST NAME - getSingleEntryById
+        // TEST DESCRIPTION - It finds single user by ID
         [Fact]
         public async Task Test3()
         {
@@ -107,7 +111,8 @@ namespace TestProject.Tests
             filteredUsers.Where(x => x.FirstName == "Daniel").ToArray().Length.Should().Be(2);
         }
 
-        //Check delete user web api end point
+        // TEST NAME - deleteUserById
+        // TEST DESCRIPTION - Check delete user web api end point
         [Fact]
         public async Task Test4()
         {
@@ -120,7 +125,8 @@ namespace TestProject.Tests
             response1.StatusCode.Should().BeEquivalentTo(StatusCodes.Status404NotFound);
         }
 
-        //Check update user web api end point
+        // TEST NAME - updateUserById
+        // TEST DESCRIPTION - Check update user web api end point
         [Fact]
         public async Task Test5()
         {
@@ -148,7 +154,8 @@ namespace TestProject.Tests
             user.Password.Should().Be("0000000");
         }
 
-        //In this test user should send byte array to the web api and put all users(count is 1000) into the database
+        // TEST NAME - exportUsers
+        // TEST DESCRIPTION - In this test user should send byte array to the web api and put all users(count is 1000) into the database
         [Fact]
         public async Task Test6()
         {
@@ -173,7 +180,8 @@ namespace TestProject.Tests
             filteredUsers.Where(x => x.FirstName == "Veronika").ToArray().Length.Should().Be(2);
         }
 
-        //Here need to implement authorization by JWT tokens
+        // TEST NAME - checkAuthorization
+        // TEST DESCRIPTION - Here need to implement authorization by JWT tokens
         [Fact]
         public async Task Test7()
         {
