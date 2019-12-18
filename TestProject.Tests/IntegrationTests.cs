@@ -48,21 +48,39 @@ namespace TestProject.Tests
             response2.StatusCode.Should().BeEquivalentTo(200);
         }
 
-        // TEST NAME - processFile
-        // TEST DESCRIPTION - In this test User should send byte array to the web api and get processed data back
+        // TEST NAME - analyzeFile
+        // TEST DESCRIPTION - In this test User should send byte array to the web api and get analytic
         [Fact]
         public async Task TestCase1()
         {
             //Here data is exporting to the end point
             var myJsonString = File.ReadAllBytes("UserCollection.xml");
             var content = new ByteArrayContent(myJsonString);
-            var response0 = await Client.PostAsync("/api/test/process", content);
+            var response0 = await Client.PostAsync("/api/file/analyze", content);
             response0.StatusCode.Should().BeEquivalentTo(StatusCodes.Status200OK);
             var statisticalData = JsonConvert.DeserializeObject<StatisticalModel>(response0.Content.ReadAsStringAsync().Result);
 
             statisticalData.MinRate.Should().Be(10);
             statisticalData.MaxRate.Should().Be(60);
             statisticalData.AverageRate.Should().Be((float)35.828);
+        }
+
+        // TEST NAME - addUserToFile
+        // TEST DESCRIPTION - In this test User should send byte array to the web api and get analytic
+        [Fact]
+        public async Task TestCase2()
+        {
+            //Here data is exporting to the end point
+            var myJsonString = File.ReadAllBytes("UserCollection.xml");
+            var content = new ByteArrayContent(myJsonString);
+            MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+            multipartContent.Add(content);
+            var user = new XMLUser {Email = "sadasd@email.com"};
+            var stringContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+            multipartContent.Add(stringContent);
+            var response0 = await Client.PostAsync("/api/file/adduser", stringContent);
+            response0.StatusCode.Should().BeEquivalentTo(StatusCodes.Status200OK);
+            var statisticalData = JsonConvert.DeserializeObject(response0.Content.ReadAsStringAsync().Result);
         }
 
         private void SetUpClient()

@@ -11,9 +11,9 @@ namespace TestProject.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TestController : ControllerBase
+    public class FileController : ControllerBase
     {
-        [HttpPost("process")]
+        [HttpPost("analyze")]
         public async Task<IActionResult> ProcessFile()
         {
             var users = new List<XMLUser>();
@@ -43,6 +43,27 @@ namespace TestProject.WebAPI.Controllers
                 MaxRate = users.Max(x => x.Rate),
                 MinRate = users.Min(x => x.Rate)
             });
+        }
+
+        [HttpPost("adduser")]
+        public async Task<IActionResult> AddUserToFile([FromBody]XMLUser user)
+        {
+            var users = new List<XMLUser>();
+            string content;
+
+            using (var reader = new StreamReader(Request.Body))
+            {
+                content = await reader.ReadToEndAsync();
+            }
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(content);
+            return new ContentResult
+            {
+                Content = xmlDoc.ToString(),
+                ContentType = "text/xml",
+                StatusCode = 200
+            };
         }
     }
 }
