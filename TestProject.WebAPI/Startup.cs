@@ -63,6 +63,11 @@ namespace TestProject.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/TestMiddleware/token"), appBuilder =>
+            {
+                appBuilder.UseMiddleware<TestMiddleware>();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
