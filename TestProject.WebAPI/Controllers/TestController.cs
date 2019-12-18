@@ -1,24 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using TestProject.WebAPI.Data;
+using TestProject.WebAPI.Models;
 
 namespace TestProject.WebAPI.Controllers
 {
-    class XMLUser
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public int Rate { get; set; }
-    }
-
     [ApiController]
     [Route("api/[controller]")]
     public class TestController : ControllerBase
@@ -26,12 +16,11 @@ namespace TestProject.WebAPI.Controllers
         [HttpPost("process")]
         public async Task<IActionResult> ProcessFile()
         {
-            string content;
             var users = new List<XMLUser>();
 
             using (var reader = new StreamReader(Request.Body))
             {
-                content = await reader.ReadToEndAsync();
+                var content = await reader.ReadToEndAsync();
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(content);
                 var userCollection = xmlDoc.SelectSingleNode("UserCollection");
@@ -48,8 +37,12 @@ namespace TestProject.WebAPI.Controllers
                 }
             }
 
-            var bytes = Encoding.ASCII.GetBytes(content);
-            return File(bytes, "application/xml");
+            return Ok(new StatisticalModel
+            {
+                AverageRate = (float)users.Sum(x => x.Rate) / users.Count,
+                MaxRate = users.Max(x => x.Rate),
+                MinRate = users.Min(x => x.Rate)
+            });
         }
     }
 }
