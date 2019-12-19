@@ -17,6 +17,9 @@ namespace TestProject.WebAPI.SeedData
 
     public class UserForAddModelForm
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 

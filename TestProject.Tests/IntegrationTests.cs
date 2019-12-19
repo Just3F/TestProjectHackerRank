@@ -1,10 +1,8 @@
 using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -42,10 +40,22 @@ namespace TestProject.Tests
         {
             var response0 = await Client.GetAsync("/api/testmiddleware/token");
             response0.StatusCode.Should().BeEquivalentTo(403);
+        }
 
+        // TEST NAME - checkMiddleware
+        // TEST DESCRIPTION - allow if there is no token in request
+        [Fact]
+        public async Task TestCase1()
+        {
             var response1 = await Client.GetAsync("/api/testmiddleware/notoken");
             response1.StatusCode.Should().BeEquivalentTo(200);
+        }
 
+        // TEST NAME - checkMiddleware
+        // TEST DESCRIPTION - Allow if there is token 12345678 in request
+        [Fact]
+        public async Task TestCase2()
+        {
             var response2 = await Client.GetAsync("/api/testmiddleware/token/?token=12345678");
             response2.StatusCode.Should().BeEquivalentTo(200);
         }
@@ -53,7 +63,7 @@ namespace TestProject.Tests
         // TEST NAME - analyzeFile
         // TEST DESCRIPTION - In this test User should send byte array to the web api and get analytic
         [Fact]
-        public async Task TestCase1()
+        public async Task TestCase3()
         {
             //Here data is exporting to the end point
             var myJsonString = File.ReadAllBytes("UserCollection.xml");
@@ -68,19 +78,20 @@ namespace TestProject.Tests
         }
 
         // TEST NAME - addUserToFile
-        // TEST DESCRIPTION - In this test User should send byte array to the web api and get analytic
+        // TEST DESCRIPTION - Add users list in file.
         [Fact]
-        public async Task TestCase2()
+        public async Task TestCase4()
         {
             //Here data is exporting to the end point
             var myJsonString = File.ReadAllBytes("UserCollection.xml");
-            var user1 = new UserForAddModelForm { Email = "test1@email.com", FirstName = "User01", LastName = "User01", Rate = 50 };
-            var user2 = new UserForAddModelForm { Email = "test1@email.com", FirstName = "User01", LastName = "User01", Rate = 50 };
-            var user3 = new UserForAddModelForm { Email = "test1@email.com", FirstName = "User01", LastName = "User01", Rate = 50 };
+            var user1 = new UserForAddModelForm { Id = 1001, Email = "test1@mail.com", FirstName = "Denny", LastName = "Chadwyck", Rate = 8 };
+            var user2 = new UserForAddModelForm { Id = 1002, Email = "test2@mail.com", FirstName = "Meredithe", LastName = "Vannet", Rate = 87 };
+            var user3 = new UserForAddModelForm { Id = 1003, Email = "test3@mail.com", FirstName = "Cymbre", LastName = "Spini", Rate = 90 };
+
             var modelForAddUsers = new AddUsersToFileModelForm
             {
                 Content = Convert.ToBase64String(myJsonString),
-                Users = new List<UserForAddModelForm>() { user1, user2, user3 }
+                Users = new List<UserForAddModelForm> { user1, user2, user3 }
             };
             var stringContent = new StringContent(JsonConvert.SerializeObject(modelForAddUsers), Encoding.UTF8, "application/json");
 
@@ -90,6 +101,49 @@ namespace TestProject.Tests
             var resultXML = response0.Content.ReadAsStringAsync().Result;
             var users = ParseUsersFromXml(resultXML);
 
+            users.Count.Should().Be(1003);
+            users.FirstOrDefault(x => x.Email == "test1@mail.com" && x.FirstName == "Denny").Should().NotBeNull();
+            users.FirstOrDefault(x => x.Email == "test2@mail.com" && x.FirstName == "Meredithe").Should().NotBeNull();
+            users.FirstOrDefault(x => x.Email == "test3@mail.com" && x.FirstName == "Cymbre").Should().NotBeNull();
+        }
+
+        // TEST NAME - addUserToFile
+        // TEST DESCRIPTION - add users in file and check the statistic
+        [Fact]
+        public async Task TestCase5()
+        {
+            //Here data is exporting to the end point
+            var myJsonString = File.ReadAllBytes("UserCollection.xml");
+            var user1 = new UserForAddModelForm { Id = 1001, Email = "test1@mail.com", FirstName = "Denny", LastName = "Chadwyck", Rate = 8 };
+            var user2 = new UserForAddModelForm { Id = 1002, Email = "test2@mail.com", FirstName = "Meredithe", LastName = "Vannet", Rate = 87 };
+            var user3 = new UserForAddModelForm { Id = 1003, Email = "test3@mail.com", FirstName = "Cymbre", LastName = "Spini", Rate = 90 };
+
+            var modelForAddUsers = new AddUsersToFileModelForm
+            {
+                Content = Convert.ToBase64String(myJsonString),
+                Users = new List<UserForAddModelForm> { user1, user2, user3 }
+            };
+            var stringContent = new StringContent(JsonConvert.SerializeObject(modelForAddUsers), Encoding.UTF8, "application/json");
+
+            var response0 = await Client.PostAsync("/api/file/adduser", stringContent);
+
+            response0.StatusCode.Should().BeEquivalentTo(StatusCodes.Status200OK);
+            var resultXML = response0.Content.ReadAsStringAsync().Result;
+            var users = ParseUsersFromXml(resultXML);
+
+            users.Count.Should().Be(1003);
+            users.FirstOrDefault(x => x.Email == "test1@mail.com" && x.FirstName == "Denny").Should().NotBeNull();
+            users.FirstOrDefault(x => x.Email == "test2@mail.com" && x.FirstName == "Meredithe").Should().NotBeNull();
+            users.FirstOrDefault(x => x.Email == "test3@mail.com" && x.FirstName == "Cymbre").Should().NotBeNull();
+
+            var content = new ByteArrayContent(Encoding.ASCII.GetBytes(resultXML));
+            var response1 = await Client.PostAsync("/api/file/analyze", content);
+            response1.StatusCode.Should().BeEquivalentTo(StatusCodes.Status200OK);
+
+            var statisticalData = JsonConvert.DeserializeObject<StatisticalModel>(response1.Content.ReadAsStringAsync().Result);
+            statisticalData.MinRate.Should().Be(8);
+            statisticalData.MaxRate.Should().Be(90);
+            statisticalData.AverageRate.Should().Be((float)35.9052849);
         }
 
         private static List<XMLUser> ParseUsersFromXml(string resultXML)

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestProject.WebAPI.Models;
@@ -50,7 +51,6 @@ namespace TestProject.WebAPI.Controllers
         [HttpPost("adduser")]
         public async Task<IActionResult> AddUserToFile(AddUsersToFileModelForm model)
         {
-            var users = new List<XMLUser>();
             string content;
 
             await using (var memoryStream = new MemoryStream(Convert.FromBase64String(model.Content)))
@@ -59,9 +59,18 @@ namespace TestProject.WebAPI.Controllers
                 content = reader.ReadToEnd();
             }
 
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(content);
+            XDocument xmlDoc = XDocument.Parse(content);
+            foreach (var userForAddModelForm in model.Users)
+            {
+                XElement userXmlElement = new XElement("User");
+                userXmlElement.Add(new XElement("id", userForAddModelForm.Id));
+                userXmlElement.Add(new XElement("first_name", userForAddModelForm.FirstName));
+                userXmlElement.Add(new XElement("last_name", userForAddModelForm.LastName));
+                userXmlElement.Add(new XElement("email", userForAddModelForm.Email));
+                userXmlElement.Add(new XElement("rate", userForAddModelForm.Rate));
 
+                xmlDoc.Element("UserCollection")?.Add(userXmlElement);
+            }
 
             string resultXml;
             await using (var stringWriter = new StringWriter())
@@ -72,14 +81,12 @@ namespace TestProject.WebAPI.Controllers
                 resultXml = stringWriter.GetStringBuilder().ToString();
             }
 
-            var result = new ContentResult
+            return new ContentResult
             {
                 Content = resultXml,
                 ContentType = "text/xml",
                 StatusCode = 200
             };
-
-            return result;
         }
     }
 }
