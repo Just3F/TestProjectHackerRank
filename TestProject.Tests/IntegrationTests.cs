@@ -1,4 +1,5 @@
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -72,15 +74,43 @@ namespace TestProject.Tests
         {
             //Here data is exporting to the end point
             var myJsonString = File.ReadAllBytes("UserCollection.xml");
-            var content = new ByteArrayContent(myJsonString);
-            MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-            multipartContent.Add(content);
-            var user = new XMLUser {Email = "sadasd@email.com"};
-            var stringContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-            multipartContent.Add(stringContent);
+            var user1 = new UserForAddModelForm { Email = "test1@email.com", FirstName = "User01", LastName = "User01", Rate = 50 };
+            var user2 = new UserForAddModelForm { Email = "test1@email.com", FirstName = "User01", LastName = "User01", Rate = 50 };
+            var user3 = new UserForAddModelForm { Email = "test1@email.com", FirstName = "User01", LastName = "User01", Rate = 50 };
+            var modelForAddUsers = new AddUsersToFileModelForm
+            {
+                Content = Convert.ToBase64String(myJsonString),
+                Users = new List<UserForAddModelForm>() { user1, user2, user3 }
+            };
+            var stringContent = new StringContent(JsonConvert.SerializeObject(modelForAddUsers), Encoding.UTF8, "application/json");
+
             var response0 = await Client.PostAsync("/api/file/adduser", stringContent);
+
             response0.StatusCode.Should().BeEquivalentTo(StatusCodes.Status200OK);
-            var statisticalData = JsonConvert.DeserializeObject(response0.Content.ReadAsStringAsync().Result);
+            var resultXML = response0.Content.ReadAsStringAsync().Result;
+            var users = ParseUsersFromXml(resultXML);
+
+        }
+
+        private static List<XMLUser> ParseUsersFromXml(string resultXML)
+        {
+            var users = new List<XMLUser>();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(resultXML);
+            var userCollection = xmlDoc.SelectSingleNode("UserCollection");
+            var usersNodes = userCollection.SelectNodes("User");
+            foreach (XmlElement xmlElement in usersNodes)
+            {
+                users.Add(new XMLUser
+                {
+                    Email = xmlElement.SelectSingleNode("email").InnerText,
+                    FirstName = xmlElement.SelectSingleNode("first_name").InnerText,
+                    LastName = xmlElement.SelectSingleNode("last_name").InnerText,
+                    Rate = Convert.ToInt32(xmlElement.SelectSingleNode("rate").InnerText)
+                });
+            }
+
+            return users;
         }
 
         private void SetUpClient()

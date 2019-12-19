@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestProject.WebAPI.Models;
+using TestProject.WebAPI.SeedData;
 
 namespace TestProject.WebAPI.Controllers
 {
@@ -46,24 +48,38 @@ namespace TestProject.WebAPI.Controllers
         }
 
         [HttpPost("adduser")]
-        public async Task<IActionResult> AddUserToFile([FromBody]XMLUser user)
+        public async Task<IActionResult> AddUserToFile(AddUsersToFileModelForm model)
         {
             var users = new List<XMLUser>();
             string content;
 
-            using (var reader = new StreamReader(Request.Body))
+            await using (var memoryStream = new MemoryStream(Convert.FromBase64String(model.Content)))
+            using (var reader = new StreamReader(memoryStream))
             {
-                content = await reader.ReadToEndAsync();
+                content = reader.ReadToEnd();
             }
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(content);
-            return new ContentResult
+
+
+            string resultXml;
+            await using (var stringWriter = new StringWriter())
+            using (var xmlTextWriter = XmlWriter.Create(stringWriter))
             {
-                Content = xmlDoc.ToString(),
+                xmlDoc.WriteTo(xmlTextWriter);
+                xmlTextWriter.Flush();
+                resultXml = stringWriter.GetStringBuilder().ToString();
+            }
+
+            var result = new ContentResult
+            {
+                Content = resultXml,
                 ContentType = "text/xml",
                 StatusCode = 200
             };
+
+            return result;
         }
     }
 }
