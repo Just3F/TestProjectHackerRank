@@ -3,12 +3,13 @@ configuration:
   has_webserver: true
   readonly_paths:
     - TestProject.Tests/IntegrationTests.cs
+    - TestProject.WebAPI/Controllers/TestMiddlewareController.cs
   scoring:
     command: rm -rf reports && dotnet build && dotnet test --logger xunit --results-directory ./reports/
     files: [reports/TestResults.xml]
   ide_config:
     default_open_files:
-      - TestProject.WebAPI/Controllers/UsersController.cs
+      - TestProject.WebAPI/Controllers/FileController.cs
     project_menu:
       run: dotnet build;cd TestProject.WebAPI;dotnet run
       install: dotnet build
